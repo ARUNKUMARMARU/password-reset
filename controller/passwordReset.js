@@ -5,14 +5,19 @@ const Joi = require('joi');
 const {User} = require('../model/userModel')
 
 
-const passwordResetController = {
-    link: async(req,res)=>{
+const passwordResetController = async(req,res)=>{
+     
     try {
+        console.log("contoller block")
+        console.log(req)
         const schema = Joi.object({ email: Joi.string().email().required() });
+        // await schema.validateAsync(req.body)
         const { error } = schema.validate(req.body);
+        
         if (error) return res.status(400).send(error.details[0].message);
 
         const user = await User.findOne({ email: req.body.email });
+       
         if (!user)
             return res.status(400).send("user with given email doesn't exist");
 
@@ -32,7 +37,7 @@ const passwordResetController = {
         res.send("An error occured");
         console.log(error);
     }
-},
+}
 
 token:async (req, res) => {
     try {
@@ -58,7 +63,8 @@ token:async (req, res) => {
         res.send("An error occured");
         console.log(error);
     }
-}}
+}
+
 
 
 module.exports = passwordResetController;

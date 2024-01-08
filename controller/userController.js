@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 
 const userController = async(req,res) =>{
    try{
+    console.log(req.body);
+
     const {error} =  validate(req.body)
 
     if(error) {
@@ -18,9 +20,9 @@ const userController = async(req,res) =>{
     }
 
 
-    // const passwordHash = await bcrypt.hash(password,10);
+    const passwordHash = await bcrypt.hash(password,10);
 
-    const newUser =  new User({name,email,password});
+    const newUser =  new User({name,email,password:passwordHash});
     const saveduser = await newUser.save();
     
     res.json({message:"user created", user:saveduser});

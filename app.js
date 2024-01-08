@@ -8,8 +8,8 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use('/api/signup',userRouter)
-app.use('/api/passwordreset',passwordResetRouter)
+app.use('/api',userRouter)
+app.use('/api',passwordResetRouter)
 
 
 module.exports=app;
