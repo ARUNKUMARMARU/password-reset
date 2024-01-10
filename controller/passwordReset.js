@@ -9,7 +9,7 @@ const passwordResetController = async(req,res)=>{
      
     try {
         console.log("contoller block")
-        console.log(req)
+        console.log(req.body)
         const schema = Joi.object({ email: Joi.string().email().required() });
         // await schema.validateAsync(req.body)
         const { error } = schema.validate(req.body);
