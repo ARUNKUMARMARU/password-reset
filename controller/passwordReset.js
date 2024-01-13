@@ -5,10 +5,10 @@ const Joi = require('joi');
 const {User} = require('../model/userModel')
 
 
-const passwordResetController = async(req,res)=>{
+const passwordResetController ={ 
+    requestlink : async(req,res)=>{
      
-    try {
-        console.log("contoller block")
+    try {        
         console.log(req.body)
         const schema = Joi.object({ email: Joi.string().email().required() });
         // await schema.validateAsync(req.body)
@@ -29,7 +29,8 @@ const passwordResetController = async(req,res)=>{
             }).save();
         }
 
-        const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token.token}`;
+        const link = `${process.env.BASE_URL}/newpassword`;
+        // ${user._id}/${token.token
         await sendEmail(user.email, "Password reset", link);
 
         res.send("password reset link sent to your email account");
@@ -37,9 +38,9 @@ const passwordResetController = async(req,res)=>{
         res.send("An error occured");
         console.log(error);
     }
-}
+},
 
-token:async (req, res) => {
+newpassword :async (req, res) => {
     try {
         const schema = Joi.object({ password: Joi.string().required() });
         const { error } = schema.validate(req.body);
@@ -63,7 +64,7 @@ token:async (req, res) => {
         res.send("An error occured");
         console.log(error);
     }
-}
+}}
 
 
 
