@@ -3,7 +3,7 @@ const passwordResetRouter = express.Router()
 const passwordResetController = require('../controller/passwordReset')
 
 passwordResetRouter.post('/requestlink', passwordResetController.requestlink);
-passwordResetRouter.get('/newpassword', passwordResetController.newpassword);
+passwordResetRouter.post('/newpassword', passwordResetController.newpassword);
 
 // (req,res,next)=>{
 //     console.log(req.method,req.url);
